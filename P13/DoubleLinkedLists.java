@@ -35,24 +35,29 @@ public class DoubleLinkedLists {
         }
     }
 
-    void insertAfter (String key, Student data){
+    void insertAfter (String key, Student data) {
         Node newNode = new Node(data);
         Node temp = head;
-        while(temp!=null){
-            if(temp.data.nim.equalsIgnoreCase(key)){
-                if(temp==tail){
-                    addLast(data);
-                }else{
-                    newNode.next = temp.next;
-                    newNode.prev = temp;
-                    temp.next.prev = temp;
-                    temp.next = newNode;
-                }
-            }
-            temp = temp.next;
-        }
-        if(temp==null){
-            System.out.println("Insertion failed. Data ("+key+") not found!");
+        boolean found = false; 
+    
+        while(temp != null){
+            if(temp.data.nim.equalsIgnoreCase(key)) {
+                if(temp == tail){
+                    addLast(data); 
+                } else {
+                    newNode.next = temp.next; 
+                    newNode.prev = temp; 
+                    temp.next.prev = newNode; 
+                    temp.next = newNode; 
+                } 
+                found = true; 
+                break;        
+            } 
+            temp = temp.next; 
+        } 
+         
+        if(!found){ 
+            System.out.println("Insertion failed. Data ("+key+") not found!!");
         }
     }
 
