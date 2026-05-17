@@ -85,34 +85,49 @@ public class DoubleLinkedLists {
         }
     }
 
-    void removeLast(){ 
-        if(isEmpty()){ 
-            System.out.println("Double linked list is currently empty!!"); 
-        }else if(head == tail){ 
-            head = tail = null; 
-        }else{ 
-            tail = tail.prev; 
-            tail.next = null; 
-        } 
-    } 
-
-    void remove(int index){ 
-        if(isEmpty()){ 
-            System.out.println("Double linked list is currently empty!!"); 
-        }else if(index == 0){ 
-            removeFirst(); 
-        }else{ 
-            Node temp = head; 
-            for(int i=0; i<index; i++){ 
-                temp = temp.next; 
-            } 
-            if(temp == tail){ 
-                removeLast(); 
-            }else{ 
-                temp.prev.next = temp.next;
-                temp.next.prev = temp.prev; 
+    void removeLast(){
+        if(isEmpty()){
+            System.out.println("Double linked list is currently empty!!");
+        } else if(head.next == null) { 
+            head = null;
+        } else {
+            Node temp = head;
+            while(temp.next != null){ 
+                temp = temp.next;
             }
+            temp.prev.next = null; 
         }
     }
+
+    void remove(int index) {
+        if(isEmpty()){
+            System.out.println("Double linked list is currently empty!!");
+            return;
+        }
+            int size = 0;
+            Node current = head;
+            while(current != null) {
+                size++;
+                current = current.next;
+            }
+            if (index < 0 || index >= size) {
+                System.out.println("Index out of bounds!");
+                return;
+            }
+            if (index == 0){
+                removeFirst();
+            } else {
+                Node temp = head;
+                for(int i = 0; i < index; i++){
+                    temp = temp.next;
+                }
+                if(temp == tail) {
+                    removeLast();
+                } else {
+                    temp.prev.next = temp.next;
+                    temp.next.prev = temp.prev;
+                }
+            }
+        }
 
 }
